@@ -14,7 +14,6 @@ jobs:
 
       - name: match
         run: npx pixelmatch screenshots/original.png current.png
-        continue-on-error: true
 
       - if: failure() && steps.match.outcome == 'failure'
         run: echo "match failed, webpage may have changed"
