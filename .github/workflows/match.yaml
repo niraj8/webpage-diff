@@ -10,10 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - run: npx capture-website-cli https://careers.zerodha.com --full-page --output=current.png
+      - run: |
+          npx capture-website-cli https://careers.zerodha.com --full-page --output=current/zerodha-careers.png
+          npx capture-website-cli https://www.greensoul.online/products/renewed-vision-gaming-chair?variant=44058865205565 --full-page --output=current/greensoul-vision-chair.png
 
       - name: match
-        run: npx pixelmatch screenshots/original.png current.png
-
-      - if: failure() && steps.match.outcome == 'failure'
-        run: echo "match failed, webpage may have changed"
+        run: |
+          npx pixelmatch originals/zerodha-careers.png current/zerodha-careers.png
+          npx pixelmatch originals/greensoul-vision-chair.png current/greensoul-vision-chair.png

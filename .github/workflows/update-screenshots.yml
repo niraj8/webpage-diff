@@ -1,0 +1,22 @@
+on:
+  workflow_dispatch: {}
+
+jobs:
+  update-screenshots:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        
+      - name: update screenshots/
+        run: |
+          npx capture-website-cli https://careers.zerodha.com --full-page --output=originals/zerodha-careers.png
+          npx capture-website-cli https://www.greensoul.online/products/renewed-vision-gaming-chair?variant=44058865205565 --full-page --output=originals/greensoul-vision-chair.png
+        
+      - name: commit updated screenshots
+      
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git commit -a -m "update screenshots"
+          git push
