@@ -1,3 +1,5 @@
+name: update screenshots
+
 on:
   workflow_dispatch: {}
 
